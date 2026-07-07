@@ -14,6 +14,9 @@
 <style>
   html, body { margin: 0; padding: 0; background: #F5EEE2; }
   img, canvas { -webkit-touch-callout: none; -webkit-user-drag: none; user-select: none; }
+  /* image-slot is an editor widget that sets touch-action:none on its photos,
+     which blocks touch scrolling on mobile. Published page: photos are static. */
+  image-slot { pointer-events: none; }
   @keyframes sealPulse {
     0%, 100% { scale: 1; }
     50% { scale: 1.045; }
