@@ -578,7 +578,7 @@ class Component extends DCLogic {
         if (attending === null) return this.setState({ error: 'Iltimos, javob variantini tanlang.' });
         try { localStorage.setItem('taklifnoma-rsvp', JSON.stringify({ name: name.trim(), attending, guests: attending ? guests : 0, at: Date.now() })); } catch (e) {}
         // forward to the couple's Telegram via the backend; never blocks the guest
-        const api = location.hostname.endsWith('github.io') ? 'https://YOUR-BACKEND-URL/rsvp' : '/rsvp';
+        const api = location.hostname.endsWith('github.io') ? 'https://wedding-invitation-u5nc.onrender.com/rsvp' : '/rsvp';
         try { fetch(api, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: name.trim(), attending, guests: attending ? guests : 0, lang: 'uz' }) }).catch(() => {}); } catch (e) {}
         this.setState({ submitted: true });
       },

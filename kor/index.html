@@ -206,8 +206,8 @@
       <div style="display:flex;flex-direction:column;gap:10px;margin-top:6px">
         <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px;background:#fff;border:1px solid rgba(176,141,62,.35)">
           <div style="display:flex;flex-direction:column;gap:2px;text-align:left">
-            <div style="font-family:Jost,sans-serif;font-size:15px;letter-spacing:1.5px;font-weight:500">700-000000-00000</div>
-            <div style="font-family:Jost,sans-serif;font-size:11px;letter-spacing:1px;color:#6b5d45">KEB HANA BANK · SHOKHRUKH</div>
+            <div style="font-family:Jost,sans-serif;font-size:15px;letter-spacing:1.5px;font-weight:500">739501-00-016951</div>
+            <div style="font-family:Jost,sans-serif;font-size:11px;letter-spacing:1px;color:#6b5d45">KOOKMIN BANK (국민은행) · SHOKHRUKH</div>
           </div>
           <button onClick="{{ copyCard1 }}" style="font-family:Jost,sans-serif;font-size:11px;letter-spacing:1px;padding:8px 14px;background:none;border:1px solid rgba(176,141,62,.5);color:#7a6230;cursor:pointer;white-space:nowrap" style-hover="background:#b08d3e;color:#faf7f0">{{ copy1Label }}</button>
         </div>
@@ -573,7 +573,7 @@ class Component extends DCLogic {
         if (attending === null) return this.setState({ error: 'Please choose one of the options.' });
         try { localStorage.setItem('taklifnoma-rsvp-en', JSON.stringify({ name: name.trim(), attending, guests: attending ? guests : 0, at: Date.now() })); } catch (e) {}
         // forward to the couple's Telegram via the backend; never blocks the guest
-        const api = location.hostname.endsWith('github.io') ? 'https://YOUR-BACKEND-URL/rsvp' : '/rsvp';
+        const api = location.hostname.endsWith('github.io') ? 'https://wedding-invitation-u5nc.onrender.com/rsvp' : '/rsvp';
         try { fetch(api, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: name.trim(), attending, guests: attending ? guests : 0, lang: 'en' }) }).catch(() => {}); } catch (e) {}
         this.setState({ submitted: true });
       },
