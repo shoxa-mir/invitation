@@ -206,19 +206,36 @@
       <p style="margin:0;font-size:17px;line-height:1.6;font-style:italic;color:#5a4f3d">Biz uchun eng qimmatli sovg‘a — Sizning tashrifingiz va samimiy duolaringiz.</p>
       <p style="margin:0;font-size:15px;line-height:1.6;color:#6b5d45">Tabrik yo‘llamoqchi bo‘lganlar uchun karta raqamlari:</p>
       <div style="display:flex;flex-direction:column;gap:10px;margin-top:6px">
-        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px;background:#fff;border:1px solid rgba(176,141,62,.35)">
-          <div style="display:flex;flex-direction:column;gap:2px;text-align:left">
-            <div style="font-family:Jost,sans-serif;font-size:15px;letter-spacing:1.5px;font-weight:500">8600 0000 0000 0000</div>
-            <div style="font-family:Jost,sans-serif;font-size:11px;letter-spacing:1px;color:#6b5d45">UZCARD · SHOXRUX M.</div>
+        <!-- card 1: collapsed until the guest taps the header -->
+        <div style="background:#fff;border:1px solid rgba(176,141,62,.35)">
+          <button onClick="{{ toggleCard1 }}" style="display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;box-sizing:border-box;padding:14px 18px;background:none;border:none;cursor:pointer;font-family:Jost,sans-serif;font-size:12px;letter-spacing:1.5px;color:#6b5d45;text-align:left" style-hover="background:#faf7f0">
+            <span>UZCARD · SHOXRUX M.</span>
+            <span style="color:#b08d3e;font-size:10px;transform:{{ card1Chevron }};transition:transform .25s ease">▼</span>
+          </button>
+          <!-- 0fr -> 1fr animates to the content's own height; stays mounted so the transition can run -->
+          <div style="display:grid;grid-template-rows:{{ card1Rows }};transition:grid-template-rows .34s cubic-bezier(.4,0,.2,1)">
+            <div style="overflow:hidden;min-height:0">
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px 14px;border-top:1px solid rgba(176,141,62,.2);opacity:{{ card1Opacity }};transform:translateY({{ card1Shift }});transition:opacity .3s ease .05s,transform .3s ease .05s">
+                <div style="font-family:Jost,sans-serif;font-size:15px;letter-spacing:1.5px;font-weight:500;text-align:left">8600 0000 0000 0000</div>
+                <button onClick="{{ copyCard1 }}" style="font-family:Jost,sans-serif;font-size:11px;letter-spacing:1px;padding:8px 14px;background:none;border:1px solid rgba(176,141,62,.5);color:#7a6230;cursor:pointer;white-space:nowrap" style-hover="background:#b08d3e;color:#faf7f0">{{ copy1Label }}</button>
+              </div>
+            </div>
           </div>
-          <button onClick="{{ copyCard1 }}" style="font-family:Jost,sans-serif;font-size:11px;letter-spacing:1px;padding:8px 14px;background:none;border:1px solid rgba(176,141,62,.5);color:#7a6230;cursor:pointer;white-space:nowrap" style-hover="background:#b08d3e;color:#faf7f0">{{ copy1Label }}</button>
         </div>
-        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px;background:#fff;border:1px solid rgba(176,141,62,.35)">
-          <div style="display:flex;flex-direction:column;gap:2px;text-align:left">
-            <div style="font-family:Jost,sans-serif;font-size:15px;letter-spacing:1.5px;font-weight:500">9860 0000 0000 0000</div>
-            <div style="font-family:Jost,sans-serif;font-size:11px;letter-spacing:1px;color:#6b5d45">HUMO · MAFTUNA A.</div>
+        <!-- card 2 -->
+        <div style="background:#fff;border:1px solid rgba(176,141,62,.35)">
+          <button onClick="{{ toggleCard2 }}" style="display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;box-sizing:border-box;padding:14px 18px;background:none;border:none;cursor:pointer;font-family:Jost,sans-serif;font-size:12px;letter-spacing:1.5px;color:#6b5d45;text-align:left" style-hover="background:#faf7f0">
+            <span>HUMO · MAFTUNA A.</span>
+            <span style="color:#b08d3e;font-size:10px;transform:{{ card2Chevron }};transition:transform .25s ease">▼</span>
+          </button>
+          <div style="display:grid;grid-template-rows:{{ card2Rows }};transition:grid-template-rows .34s cubic-bezier(.4,0,.2,1)">
+            <div style="overflow:hidden;min-height:0">
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px 14px;border-top:1px solid rgba(176,141,62,.2);opacity:{{ card2Opacity }};transform:translateY({{ card2Shift }});transition:opacity .3s ease .05s,transform .3s ease .05s">
+                <div style="font-family:Jost,sans-serif;font-size:15px;letter-spacing:1.5px;font-weight:500;text-align:left">9860 0000 0000 0000</div>
+                <button onClick="{{ copyCard2 }}" style="font-family:Jost,sans-serif;font-size:11px;letter-spacing:1px;padding:8px 14px;background:none;border:1px solid rgba(176,141,62,.5);color:#7a6230;cursor:pointer;white-space:nowrap" style-hover="background:#b08d3e;color:#faf7f0">{{ copy2Label }}</button>
+              </div>
+            </div>
           </div>
-          <button onClick="{{ copyCard2 }}" style="font-family:Jost,sans-serif;font-size:11px;letter-spacing:1px;padding:8px 14px;background:none;border:1px solid rgba(176,141,62,.5);color:#7a6230;cursor:pointer;white-space:nowrap" style-hover="background:#b08d3e;color:#faf7f0">{{ copy2Label }}</button>
         </div>
       </div>
     </div>
@@ -354,7 +371,9 @@ class Component extends DCLogic {
     // taklifnoma page
     now: Date.now(), name: '', attending: null, submitted: false, error: '', copied: null, guests: 1,
     // background music
-    muted: false, musicStarted: false
+    muted: false, musicStarted: false,
+    // gift card dropdowns
+    card1Open: false, card2Open: false
   };
 
   petalCanvasRef = React.createRef();
@@ -622,6 +641,17 @@ class Component extends DCLogic {
       resetRsvp: () => this.setState({ submitted: false }),
       copyCard1: () => this._copyCard('8600 0000 0000 0000', 1),
       copyCard2: () => this._copyCard('9860 0000 0000 0000', 2),
+      // gift card dropdowns
+      card1Rows: this.state.card1Open ? '1fr' : '0fr',
+      card2Rows: this.state.card2Open ? '1fr' : '0fr',
+      card1Opacity: this.state.card1Open ? 1 : 0,
+      card2Opacity: this.state.card2Open ? 1 : 0,
+      card1Shift: this.state.card1Open ? '0px' : '-6px',
+      card2Shift: this.state.card2Open ? '0px' : '-6px',
+      card1Chevron: this.state.card1Open ? 'rotate(180deg)' : 'rotate(0deg)',
+      card2Chevron: this.state.card2Open ? 'rotate(180deg)' : 'rotate(0deg)',
+      toggleCard1: () => this.setState(s => ({ card1Open: !s.card1Open })),
+      toggleCard2: () => this.setState(s => ({ card2Open: !s.card2Open })),
       copy1Label: this.state.copied === 1 ? 'NUSXALANDI ✓' : 'NUSXA OLISH',
       copy2Label: this.state.copied === 2 ? 'NUSXALANDI ✓' : 'NUSXA OLISH',
       notSubmitted: !submitted,
