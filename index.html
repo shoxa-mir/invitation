@@ -209,14 +209,14 @@
         <!-- card 1: collapsed until the guest taps the header -->
         <div style="background:#fff;border:1px solid rgba(176,141,62,.35)">
           <button onClick="{{ toggleCard1 }}" style="display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;box-sizing:border-box;padding:14px 18px;background:none;border:none;cursor:pointer;font-family:Jost,sans-serif;font-size:12px;letter-spacing:1.5px;color:#6b5d45;text-align:left" style-hover="background:#faf7f0">
-            <span>UZCARD · SHOXRUX M.</span>
+            <span>UZUM VISA · SHOXRUX M.</span>
             <span style="color:#b08d3e;font-size:10px;transform:{{ card1Chevron }};transition:transform .25s ease">▼</span>
           </button>
           <!-- 0fr -> 1fr animates to the content's own height; stays mounted so the transition can run -->
           <div style="display:grid;grid-template-rows:{{ card1Rows }};transition:grid-template-rows .34s cubic-bezier(.4,0,.2,1)">
             <div style="overflow:hidden;min-height:0">
               <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px 14px;border-top:1px solid rgba(176,141,62,.2);opacity:{{ card1Opacity }};transform:translateY({{ card1Shift }});transition:opacity .3s ease .05s,transform .3s ease .05s">
-                <div style="font-family:Jost,sans-serif;font-size:15px;letter-spacing:1.5px;font-weight:500;text-align:left">8600 0000 0000 0000</div>
+                <div style="font-family:Jost,sans-serif;font-size:15px;letter-spacing:1.5px;font-weight:500;text-align:left">4916 9903 4044 6555</div>
                 <button onClick="{{ copyCard1 }}" style="font-family:Jost,sans-serif;font-size:11px;letter-spacing:1px;padding:8px 14px;background:none;border:1px solid rgba(176,141,62,.5);color:#7a6230;cursor:pointer;white-space:nowrap" style-hover="background:#b08d3e;color:#faf7f0">{{ copy1Label }}</button>
               </div>
             </div>
@@ -225,13 +225,13 @@
         <!-- card 2 -->
         <div style="background:#fff;border:1px solid rgba(176,141,62,.35)">
           <button onClick="{{ toggleCard2 }}" style="display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;box-sizing:border-box;padding:14px 18px;background:none;border:none;cursor:pointer;font-family:Jost,sans-serif;font-size:12px;letter-spacing:1.5px;color:#6b5d45;text-align:left" style-hover="background:#faf7f0">
-            <span>HUMO · MAFTUNA A.</span>
+            <span>TBC VISA · MAFTUNA A.</span>
             <span style="color:#b08d3e;font-size:10px;transform:{{ card2Chevron }};transition:transform .25s ease">▼</span>
           </button>
           <div style="display:grid;grid-template-rows:{{ card2Rows }};transition:grid-template-rows .34s cubic-bezier(.4,0,.2,1)">
             <div style="overflow:hidden;min-height:0">
               <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px 14px;border-top:1px solid rgba(176,141,62,.2);opacity:{{ card2Opacity }};transform:translateY({{ card2Shift }});transition:opacity .3s ease .05s,transform .3s ease .05s">
-                <div style="font-family:Jost,sans-serif;font-size:15px;letter-spacing:1.5px;font-weight:500;text-align:left">9860 0000 0000 0000</div>
+                <div style="font-family:Jost,sans-serif;font-size:15px;letter-spacing:1.5px;font-weight:500;text-align:left">4466 1369 1076 5677</div>
                 <button onClick="{{ copyCard2 }}" style="font-family:Jost,sans-serif;font-size:11px;letter-spacing:1px;padding:8px 14px;background:none;border:1px solid rgba(176,141,62,.5);color:#7a6230;cursor:pointer;white-space:nowrap" style-hover="background:#b08d3e;color:#faf7f0">{{ copy2Label }}</button>
               </div>
             </div>
@@ -639,8 +639,8 @@ class Component extends DCLogic {
         this.setState({ submitted: true });
       },
       resetRsvp: () => this.setState({ submitted: false }),
-      copyCard1: () => this._copyCard('8600 0000 0000 0000', 1),
-      copyCard2: () => this._copyCard('9860 0000 0000 0000', 2),
+      copyCard1: () => this._copyCard('4916 9903 4044 6555', 1),
+      copyCard2: () => this._copyCard('4466 1369 1076 5677', 2),
       // gift card dropdowns
       card1Rows: this.state.card1Open ? '1fr' : '0fr',
       card2Rows: this.state.card2Open ? '1fr' : '0fr',
