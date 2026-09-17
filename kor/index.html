@@ -216,7 +216,7 @@
           </button>
           <!-- 0fr -> 1fr animates to the content's own height; stays mounted so the transition can run -->
           <div style="display:grid;grid-template-rows:{{ card1Rows }};transition:grid-template-rows .34s cubic-bezier(.4,0,.2,1)">
-            <div style="overflow:hidden;min-height:0">
+            <div style="min-height:0">
               <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px 14px;border-top:1px solid rgba(176,141,62,.2);opacity:{{ card1Opacity }};transform:translateY({{ card1Shift }});transition:opacity .3s ease .05s,transform .3s ease .05s">
                 <div style="font-family:Jost,sans-serif;font-size:15px;letter-spacing:1.5px;font-weight:500;text-align:left">739501-00-016951</div>
                 <button onClick="{{ copyCard1 }}" style="font-family:Jost,sans-serif;font-size:11px;letter-spacing:1px;padding:8px 14px;background:none;border:1px solid rgba(176,141,62,.5);color:#7a6230;cursor:pointer;white-space:nowrap" style-hover="background:#b08d3e;color:#faf7f0">{{ copy1Label }}</button>
@@ -360,7 +360,7 @@ class Component extends DCLogic {
     // background music
     muted: false, musicStarted: false,
     // gift account dropdown
-    card1Open: false
+    card1Open: true
   };
 
   petalCanvasRef = React.createRef();
@@ -626,7 +626,7 @@ class Component extends DCLogic {
         this.setState({ submitted: true });
       },
       resetRsvp: () => this.setState({ submitted: false }),
-      copyCard1: () => this._copyCard('739501-00-016951', 1),
+      copyCard1: () => this._copyCard('73950100016951', 1),
       // gift account dropdown
       card1Rows: this.state.card1Open ? '1fr' : '0fr',
       card1Opacity: this.state.card1Open ? 1 : 0,
