@@ -204,40 +204,6 @@
     <div data-screen-label="Sovg‘a" style="padding:44px 36px 16px;text-align:center;display:flex;flex-direction:column;gap:10px;animation:tk-reveal 1s ease both;animation-timeline:view();animation-range:entry 0% entry 40%">
       <div style="font-family:Jost,sans-serif;font-size:11px;letter-spacing:5px;color:#b08d3e">SOVG‘A HAQIDA</div>
       <p style="margin:0;font-size:17px;line-height:1.6;font-style:italic;color:#5a4f3d">Biz uchun eng qimmatli sovg‘a — Sizning tashrifingiz va samimiy duolaringiz.</p>
-      <p style="margin:0;font-size:15px;line-height:1.6;color:#6b5d45">Tabrik yo‘llamoqchi bo‘lganlar uchun karta raqamlari:</p>
-      <div style="display:flex;flex-direction:column;gap:10px;margin-top:6px">
-        <!-- card 1: collapsed until the guest taps the header -->
-        <div style="background:#fff;border:1px solid rgba(176,141,62,.35)">
-          <button onClick="{{ toggleCard1 }}" style="display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;box-sizing:border-box;padding:14px 18px;background:none;border:none;cursor:pointer;font-family:Jost,sans-serif;font-size:12px;letter-spacing:1.5px;color:#6b5d45;text-align:left" style-hover="background:#faf7f0">
-            <span>UZUM VISA · SHOXRUX M.</span>
-            <span style="color:#b08d3e;font-size:10px;transform:{{ card1Chevron }};transition:transform .25s ease">▼</span>
-          </button>
-          <!-- 0fr -> 1fr animates to the content's own height; stays mounted so the transition can run -->
-          <div style="display:grid;grid-template-rows:{{ card1Rows }};transition:grid-template-rows .34s cubic-bezier(.4,0,.2,1)">
-            <div style="overflow:hidden;min-height:0">
-              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px 14px;border-top:1px solid rgba(176,141,62,.2);opacity:{{ card1Opacity }};transform:translateY({{ card1Shift }});transition:opacity .3s ease .05s,transform .3s ease .05s">
-                <div style="font-family:Jost,sans-serif;font-size:15px;letter-spacing:1.5px;font-weight:500;text-align:left">4916 9903 4044 6555</div>
-                <button onClick="{{ copyCard1 }}" style="font-family:Jost,sans-serif;font-size:11px;letter-spacing:1px;padding:8px 14px;background:none;border:1px solid rgba(176,141,62,.5);color:#7a6230;cursor:pointer;white-space:nowrap" style-hover="background:#b08d3e;color:#faf7f0">{{ copy1Label }}</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- card 2 -->
-        <div style="background:#fff;border:1px solid rgba(176,141,62,.35)">
-          <button onClick="{{ toggleCard2 }}" style="display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;box-sizing:border-box;padding:14px 18px;background:none;border:none;cursor:pointer;font-family:Jost,sans-serif;font-size:12px;letter-spacing:1.5px;color:#6b5d45;text-align:left" style-hover="background:#faf7f0">
-            <span>TBC VISA · MAFTUNA A.</span>
-            <span style="color:#b08d3e;font-size:10px;transform:{{ card2Chevron }};transition:transform .25s ease">▼</span>
-          </button>
-          <div style="display:grid;grid-template-rows:{{ card2Rows }};transition:grid-template-rows .34s cubic-bezier(.4,0,.2,1)">
-            <div style="overflow:hidden;min-height:0">
-              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px 14px;border-top:1px solid rgba(176,141,62,.2);opacity:{{ card2Opacity }};transform:translateY({{ card2Shift }});transition:opacity .3s ease .05s,transform .3s ease .05s">
-                <div style="font-family:Jost,sans-serif;font-size:15px;letter-spacing:1.5px;font-weight:500;text-align:left">4466 1369 1076 5677</div>
-                <button onClick="{{ copyCard2 }}" style="font-family:Jost,sans-serif;font-size:11px;letter-spacing:1px;padding:8px 14px;background:none;border:1px solid rgba(176,141,62,.5);color:#7a6230;cursor:pointer;white-space:nowrap" style-hover="background:#b08d3e;color:#faf7f0">{{ copy2Label }}</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
 
     <!-- Rahmat -->
@@ -369,11 +335,9 @@ class Component extends DCLogic {
     flapBehind: false,
     isMobile: typeof window !== 'undefined' && window.matchMedia('(max-width: 680px)').matches,
     // taklifnoma page
-    now: Date.now(), name: '', attending: null, submitted: false, error: '', copied: null, guests: 1,
+    now: Date.now(), name: '', attending: null, submitted: false, error: '', guests: 1,
     // background music
-    muted: false, musicStarted: false,
-    // gift card dropdowns
-    card1Open: false, card2Open: false
+    muted: false, musicStarted: false
   };
 
   petalCanvasRef = React.createRef();
@@ -496,20 +460,7 @@ class Component extends DCLogic {
     this.clearTimers();
     clearTimeout(this._autoT);
     clearInterval(this._cd);
-    clearTimeout(this._ct);
     clearInterval(this._fade);
-  }
-
-  _copyCard(num, which) {
-    const digits = num.replace(/\s/g, '');
-    const done = () => {
-      this.setState({ copied: which });
-      clearTimeout(this._ct);
-      this._ct = setTimeout(() => this.setState({ copied: null }), 2000);
-    };
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(digits).then(done, done);
-    } else { done(); }
   }
 
   clearTimers() {
@@ -639,21 +590,6 @@ class Component extends DCLogic {
         this.setState({ submitted: true });
       },
       resetRsvp: () => this.setState({ submitted: false }),
-      copyCard1: () => this._copyCard('4916990340446555', 1),
-      copyCard2: () => this._copyCard('4466136910765677', 2),
-      // gift card dropdowns
-      card1Rows: this.state.card1Open ? '1fr' : '0fr',
-      card2Rows: this.state.card2Open ? '1fr' : '0fr',
-      card1Opacity: this.state.card1Open ? 1 : 0,
-      card2Opacity: this.state.card2Open ? 1 : 0,
-      card1Shift: this.state.card1Open ? '0px' : '-6px',
-      card2Shift: this.state.card2Open ? '0px' : '-6px',
-      card1Chevron: this.state.card1Open ? 'rotate(180deg)' : 'rotate(0deg)',
-      card2Chevron: this.state.card2Open ? 'rotate(180deg)' : 'rotate(0deg)',
-      toggleCard1: () => this.setState(s => ({ card1Open: !s.card1Open })),
-      toggleCard2: () => this.setState(s => ({ card2Open: !s.card2Open })),
-      copy1Label: this.state.copied === 1 ? 'NUSXALANDI ✓' : 'NUSXA OLISH',
-      copy2Label: this.state.copied === 2 ? 'NUSXALANDI ✓' : 'NUSXA OLISH',
       notSubmitted: !submitted,
       submitted: submitted,
       thanksTitle: attending ? 'Rahmat, ' + name.trim() + '!' : 'Javobingiz uchun rahmat, ' + name.trim() + '.',
